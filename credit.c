@@ -42,13 +42,13 @@ int main(void)
     
     // Send every other digit to be processed, starting from second to last
     int check = 0;
-    for (int c = 1; c < 16; c+=2)
+    for (int c = 1; c < 16; c += 2)
     {
         check += add_digits(cc[c]);
     }
     
     // Add in every other digit, starting from the first
-    for (int c = 0; c < 16; c+=2)
+    for (int c = 0; c < 16; c += 2)
     {
         check += cc[c];
     }
@@ -62,7 +62,7 @@ int main(void)
         {
             printf("AMEX\n");
         }
-        else if (first2 >= 51 && first2 <=55)
+        else if (first2 >= 51 && first2 <= 55)
         {
             printf("MASTERCARD\n");    
         }
