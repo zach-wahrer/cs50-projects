@@ -73,19 +73,12 @@ int main(int argc, string argv[])
             printf("\n");
         }
     }
-//   else if (argc == 0 || arc > 2)
-//   {
-//       printf("Usage: ./vigenere keyword\n");
-//       return 0;
-//   }
-
+    // Exit if the user fails to enter a properly formated keyword
     else
     {
         printf("Usage: ./vigenere keyword\n");
         return 1;
-    }
-    
-    
+    }   
 }
 
 int cypher(int plain, int key)
