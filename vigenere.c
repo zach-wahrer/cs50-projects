@@ -25,7 +25,7 @@ int main(int argc, string argv[])
                 wrong = 1;
                 // Exit if numbers in keyword
                 printf("Usage: ./vigenere keyword\n");
-                return 0;
+                return 1;
             }
         }
         // Continue if keyword valid
@@ -73,16 +73,16 @@ int main(int argc, string argv[])
             printf("\n");
         }
     }
- //   else if (argc == 0 || arc > 2)
- //   {
- //       printf("Usage: ./vigenere keyword\n");
- //       return 0;
- //   }
+//   else if (argc == 0 || arc > 2)
+//   {
+//       printf("Usage: ./vigenere keyword\n");
+//       return 0;
+//   }
 
     else
     {
         printf("Usage: ./vigenere keyword\n");
-        return 0;
+        return 1;
     }
     
     
