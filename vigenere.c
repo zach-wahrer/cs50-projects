@@ -25,7 +25,7 @@ int main(int argc, string argv[])
                 wrong = 1;
                 // Exit if numbers in keyword
                 printf("Usage: ./vigenere keyword\n");
-                return 1;
+                return 0;
             }
         }
         // Continue if keyword valid
@@ -39,7 +39,6 @@ int main(int argc, string argv[])
             printf("ciphertext: ");
             
             // Do cypher shift loop for each letter
-            string cyphertext = "";
             int plainlength = strlen(plaintext);
             for (int i = 0, j = 0; i < plainlength; i++)
             {
@@ -73,12 +72,19 @@ int main(int argc, string argv[])
             printf("\n");
         }
     }
-    // Exit if the user fails to enter a properly formated keyword
+ //   else if (argc == 0 || arc > 2)
+ //   {
+ //       printf("Usage: ./vigenere keyword\n");
+ //       return 0;
+ //   }
+
     else
     {
         printf("Usage: ./vigenere keyword\n");
-        return 1;
-    }   
+        return 0;
+    }
+    
+    
 }
 
 int cypher(int plain, int key)
