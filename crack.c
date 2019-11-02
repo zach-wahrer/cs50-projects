@@ -15,9 +15,9 @@ int main(int argc, string argv[])
     }
     
     // Initialize key variables
-    char* hash = argv[1];
+    char *hash = argv[1];
     char testkey[6];
-    char* alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char *alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int length = strlen(alpha);
     
     // Pull the first two hash characters for the salt
@@ -60,7 +60,7 @@ int main(int argc, string argv[])
             //printf("testkey: %s\n", testkey);
             if (strcmp(crypt(testkey, salt), hash) == 0)
             {
-                printf ("%s\n", testkey);
+                printf("%s\n", testkey);
                 return 0;
             }
         }
@@ -87,7 +87,7 @@ int main(int argc, string argv[])
             //printf("testkey: %s\n", testkey);
             if (strcmp(crypt(testkey, salt), hash) == 0)
             {
-                printf ("%s\n", testkey);
+                printf("%s\n", testkey);
                 return 0;
             }
                 
@@ -98,7 +98,7 @@ int main(int argc, string argv[])
                 //printf("testkey: %s\n", testkey);
                 if (strcmp(crypt(testkey, salt), hash) == 0)
                 {
-                    printf ("%s\n", testkey);
+                    printf("%s\n", testkey);
                     return 0;
                 }
             }
@@ -126,7 +126,7 @@ int main(int argc, string argv[])
             //printf("testkey: %s\n", testkey);
             if (strcmp(crypt(testkey, salt), hash) == 0)
             {
-                printf ("%s\n", testkey);
+                printf("%s\n", testkey);
                 return 0;
             }
                 
@@ -137,7 +137,7 @@ int main(int argc, string argv[])
                 //printf("testkey: %s\n", testkey);
                 if (strcmp(crypt(testkey, salt), hash) == 0)
                 {
-                    printf ("%s\n", testkey);
+                    printf("%s\n", testkey);
                     return 0;
                 }
                 
@@ -148,7 +148,7 @@ int main(int argc, string argv[])
                     //printf("testkey: %s\n", testkey);
                     if (strcmp(crypt(testkey, salt), hash) == 0)
                     {
-                        printf ("%s\n", testkey);
+                        printf("%s\n", testkey);
                         return 0;
                     }
                 }
@@ -177,7 +177,7 @@ int main(int argc, string argv[])
             //printf("testkey: %s\n", testkey);
             if (strcmp(crypt(testkey, salt), hash) == 0)
             {
-                printf ("%s\n", testkey);
+                printf("%s\n", testkey);
                 return 0;
             }
                 
@@ -185,10 +185,10 @@ int main(int argc, string argv[])
             for (int third = 0; third < length; third++)
             {
                 testkey[2] = alpha[third];
-               // printf("testkey: %s\n", testkey);
+                // printf("testkey: %s\n", testkey);
                 if (strcmp(crypt(testkey, salt), hash) == 0)
                 {
-                    printf ("%s\n", testkey);
+                    printf("%s\n", testkey);
                     return 0;
                 }
                 
@@ -199,7 +199,7 @@ int main(int argc, string argv[])
                     //printf("testkey: %s\n", testkey);
                     if (strcmp(crypt(testkey, salt), hash) == 0)
                     {
-                        printf ("%s\n", testkey);
+                        printf("%s\n", testkey);
                         return 0;
                     }
                     
@@ -210,7 +210,7 @@ int main(int argc, string argv[])
                         //printf("testkey: %s\n", testkey);
                         if (strcmp(crypt(testkey, salt), hash) == 0)
                         {
-                            printf ("%s\n", testkey);
+                            printf("%s\n", testkey);
                             return 0;
                         }
                     } // Close of fifth
