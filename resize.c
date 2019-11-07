@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     bio.biHeight *= n;
     int opadding = (4 - (bio.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;     // determine padding for in scanlines
     bio.biSizeImage = ((sizeof(RGBTRIPLE) * bio.biWidth) + opadding) * abs(bio.biHeight);
-    bfo.bfSize = bio.biSize + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+    bfo.bfSize = bio.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&bfo, sizeof(BITMAPFILEHEADER), 1, outptr);
