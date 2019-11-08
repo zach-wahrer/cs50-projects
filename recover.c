@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     }
 
     // Set initial variables
-    char filename[] = "000.jpg";
+    char filename[] = "999.jpg";
     int write = 0;
     int firstmatch = 0;
     int i = 0;
@@ -45,9 +45,11 @@ int main(int argc, char *argv[])
     // Read file until EOF
     for (eof = 1; eof != 0; i++)
     {
-
         // Create file name
-        sprintf(filename, "%03i.jpg", i);
+        if (write == 1)
+        {
+            sprintf(filename, "%03i.jpg", i);
+        }
         // Open recovery file
         FILE *outptr = fopen(filename, "w");
         // Exit if it cannot be created
@@ -67,7 +69,7 @@ int main(int argc, char *argv[])
         }
 
         // Run until we need a new file
-        do
+        while (eof != 0)
         {
             // Check the signature area for a JPG header
             if (buffer[0] == 0xff &&
@@ -76,7 +78,7 @@ int main(int argc, char *argv[])
                 (buffer[3] & 0xf0) == 0xe0)
             {
                 // Close current file, break out, and write data
-                if  (firstmatch == 0) // if this is first time, don't close file
+                if  (firstmatch == 1) // if this isn't the first time, close file
                 {
                     fclose(outptr);
                 }
@@ -103,7 +105,7 @@ int main(int argc, char *argv[])
                 }
             }
 
-        } while (eof != 0);
+        }
 
         // Close final output file when EOF reached
         if (eof == 0)
@@ -116,6 +118,9 @@ int main(int argc, char *argv[])
 
     // Close input file
     fclose(inptr);
+
+    // Erase initial garbage file
+    remove("./999.jpg");
 
     // Successful exit
     return 0;
