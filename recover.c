@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
                 buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
             {
                 // Close current file, break out, and write data
-                if  (firstmatch == 1) // if this isn't the first time, close file
+                if (firstmatch == 1) // if this isn't the first time, close file
                 {
                     fclose(outptr);
                 }
