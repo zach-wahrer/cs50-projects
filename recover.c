@@ -117,9 +117,6 @@ int main(int argc, char *argv[])
     // Close input file
     fclose(inptr);
 
-    // Erase initial garbage file
-    //remove("./999.jpg");
-
     // Successful exit
     return 0;
 }
