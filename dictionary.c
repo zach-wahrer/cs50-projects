@@ -110,7 +110,14 @@ bool check(const char *word)
     char fixedword[length];
     for (int i = 0; i <= length; i++)
     {
-        fixedword[i] = tolower(word[i]);
+        if(isupper(word[i]))
+        {
+            fixedword[i] = tolower(word[i]);
+        }
+        else
+        {
+            fixedword[i] = word[i];
+        }
     }
 
     // Get into the correct linked list
