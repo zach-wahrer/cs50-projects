@@ -9,7 +9,7 @@
 #include "dictionary.h"
 
 // Represents number of buckets in a hash table
-#define N 17576
+#define N 26
 
 // Create int for the counter
 unsigned int counter = 0;
@@ -28,31 +28,7 @@ node *hashtable[N];
 // Hashes word to a number between 0 and 25, inclusive, based on its first letter
 unsigned int hash(const char *word)
 {
-    int wlength = strlen(word);
-
-    // Check if it is 3 or larger letter word
-    if (wlength >= 3 && word[2] != '\'')
-    {
-        // Count in base 26, sort of
-        return ((tolower(word[0]) - 'a') * 676) +
-                ((tolower(word[1]) - 'a') * 26) +
-                (tolower(word[2]) - 'a');
-    }
-    // For two letter, put into "letter, letter" + "a" list
-    else if (wlength == 2 && word[1] != '\'')
-    {
-        return ((tolower(word[0]) - 'a') * 676) +
-                ((tolower(word[1]) - 'a') * 26);
-    }
-    // Put single letter words into the "letter" + "a" + "a" bucket
-    else
-    {
-        return ((tolower(word[0]) - 'a') * 676);
-    }
-
-
-    // Old hash function
-    //return tolower(word[0]) - 'a';
+    return tolower(word[0]) - 'a';
 }
 
 // Loads dictionary into memory, returning true if successful else false
