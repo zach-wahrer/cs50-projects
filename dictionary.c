@@ -140,14 +140,7 @@ bool check(const char *word)
     char fixedword[length];
     for (int i = 0; i <= length; i++)
     {
-        if (isupper(word[i]))
-        {
-            fixedword[i] = tolower(word[i]);
-        }
-        else
-        {
-            fixedword[i] = word[i];
-        }
+        fixedword[i] = tolower(word[i]);
     }
 
     // Get location in linked list array
