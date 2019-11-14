@@ -34,15 +34,12 @@ unsigned int hash(const char *word)
     if (wlength >= 3 && word[2] != '\'')
     {
         // Count in base 26, sort of
-        return ((tolower(word[0]) - 'a') * 676) +
-                ((tolower(word[1]) - 'a') * 26) +
-                (tolower(word[2]) - 'a');
+        return ((tolower(word[0]) - 'a') * 676) + ((tolower(word[1]) - 'a') * 26) + (tolower(word[2]) - 'a');
     }
     // For two letter, put into "letter, letter" + "a" list
     else if (wlength == 2 && word[1] != '\'')
     {
-        return ((tolower(word[0]) - 'a') * 676) +
-                ((tolower(word[1]) - 'a') * 26);
+        return ((tolower(word[0]) - 'a') * 676) + ((tolower(word[1]) - 'a') * 26);
     }
     // Put single letter words into the "letter" + "a" + "a" bucket
     else
