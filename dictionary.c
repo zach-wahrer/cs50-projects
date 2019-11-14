@@ -30,14 +30,14 @@ unsigned int hash(const char *word)
 {
     int wlength = strlen(word);
 
-    if (wlength >= 4 && word[3] != '\'')
+    if (wlength >= 4 && word[3] != '\'' && word[2] != '\'' && word[1] != '\'')
     {
         // Count in base 26, sort of
         return ((tolower(word[0]) - 'a') * 17576) + ((tolower(word[1]) - 'a') * 676) + ((tolower(word[2]) - 'a') * 26) + (tolower(word[3]) - 'a');
     }
 
     // Check if it is 3 or larger letter word
-    if (wlength == 3 && word[2] != '\'')
+    if (wlength == 3 && word[2] != '\'' && word[1] != '\'')
     {
         // Count in base 26, sort of
         return ((tolower(word[0]) - 'a') * 17576) + ((tolower(word[1]) - 'a') * 676) + ((tolower(word[2]) - 'a') * 26);
