@@ -139,19 +139,19 @@ bool check(const char *word)
     unsigned int loc = hash(word);
 
     // Make sure the word is lower-case to compare
-//    int length = strlen(word);
-//    char fixedword[length];
-//    for (int i = 0; i <= length; i++)
-//    {
-//        if (isupper(word[i]))
-//        {
-//            fixedword[i] = tolower(word[i]);
-//        }
-//        else
-//        {
-//            fixedword[i] = word[i];
-//        }
-//    }
+    int length = strlen(word);
+    char fixedword[length];
+    for (int i = 0; i <= length; i++)
+    {
+        if (isupper(word[i]))
+        {
+            fixedword[i] = tolower(word[i]);
+        }
+        else
+        {
+            fixedword[i] = word[i];
+        }
+    }
 
     // Get into the correct linked list
     node *ptr = hashtable[loc];
@@ -160,7 +160,7 @@ bool check(const char *word)
     while (ptr != NULL)
     {
         // Check for match
-        if (!(strcmp(ptr->word, word)))
+        if (!(strcmp(ptr->word, fixedword)))
         {
             return true;
         }
