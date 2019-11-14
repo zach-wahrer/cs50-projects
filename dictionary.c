@@ -33,30 +33,30 @@ unsigned int hash(const char *word)
     if (wlength >= 4 && word[3] != '\'' && word[2] != '\'' && word[1] != '\'')
     {
         // Count in base 26, sort of
-        return ((tolower(word[0]) - 'a') * 17576) +
-               ((tolower(word[1]) - 'a') * 676) +
-               ((tolower(word[2]) - 'a') * 26) +
-               (tolower(word[3]) - 'a');
+        return ((word[0] - 'a') * 17576) +
+               ((word[1] - 'a') * 676) +
+               ((word[2] - 'a') * 26) +
+               (word[3] - 'a');
     }
 
     // Check if it is 3 or larger letter word
     if (wlength == 3 && word[2] != '\'' && word[1] != '\'')
     {
         // Count in base 26, sort of
-        return ((tolower(word[0]) - 'a') * 17576) +
-               ((tolower(word[1]) - 'a') * 676) +
-               ((tolower(word[2]) - 'a') * 26);
+        return ((word[0] - 'a') * 17576) +
+               ((word[1] - 'a') * 676) +
+               ((word[2] - 'a') * 26);
     }
     // For two letter, put into "letter, letter" + "a" list
     else if (wlength == 2 && word[1] != '\'')
     {
-        return ((tolower(word[0]) - 'a') * 17576) +
-               ((tolower(word[1]) - 'a') * 676);
+        return ((word[0] - 'a') * 17576) +
+               ((word[1] - 'a') * 676);
     }
     // Put single letter words into the "letter" + "a" + "a" bucket
     else
     {
-        return ((tolower(word[0]) - 'a') * 17576);
+        return ((word[0] - 'a') * 17576);
     }
 
 
@@ -135,9 +135,6 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // Get location in linked list array
-    unsigned int loc = hash(word);
-
     // Make sure the word is lower-case to compare
     int length = strlen(word);
     char fixedword[length];
@@ -152,6 +149,9 @@ bool check(const char *word)
             fixedword[i] = word[i];
         }
     }
+
+    // Get location in linked list array
+    unsigned int loc = hash(fixedword);
 
     // Get into the correct linked list
     node *ptr = hashtable[loc];
