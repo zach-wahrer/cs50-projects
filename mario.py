@@ -21,7 +21,7 @@ def main():
         for k in range(curHeight + 1):
             block += "#"
         # Build row
-        print(lSpace + block + "  " + block);
+        print(lSpace + block + "  " + block)
 
 
 if __name__ == "__main__":
