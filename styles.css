@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant|Turret+Road&display=swap');
+
+body {
+    background-color: black;
+    color: lightgray;
+    font-family: 'Cormorant', serif;
+    font-size: 110%;
+}
+
+h1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    text-shadow: 10px 10px #222222;
+    font-family: 'Turret Road', cursive;
+    font-weight: bold;
+
+}
+
+h2 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    text-shadow: 10px 10px #222222;
+    font-family: 'Turret Road', cursive;
+    font-weight: bold;
+
+}
+
+pre {
+    padding-left: 15px;
+    color: lightgray;
+}
+
+p {
+    padding-left: 15px;
+}
+
+
+
+a:link {
+    color: #3B5998;
+}
+
+a:visited {
+    color: #9daccb;
+}
+
+a:hover {
+    color: white;
+}
+
+a:active {
+    color: lightgray;
+}
+
+.links {
+    padding-top: 20px;
+    word-spacing: 10px;
+    font-family: 'Turret Road', cursive;
+}
+
+#title {
+    letter-spacing: 12px;
+    word-spacing: 14px;
+}
+
+.imgpad {
+    padding-bottom: 20px;
+    padding-left: 15px;
+}
+
+#slapper {
+    width: 30%;
+    height: 30%;
+
+}
+
+#selfie {
+    padding-right: 20px;
+    padding-top: 20px;
+}
