@@ -28,6 +28,5 @@ def main():
     print(int(counter))
 
 
-
 if __name__ == "__main__":
     main()
