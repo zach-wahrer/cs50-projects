@@ -36,35 +36,35 @@ def crack(length, insalt, alpha):
     for letter1 in alpha:
         word = letter1
         # Only check if this is the specified length
-        if length == 1:
+        if length == 0:
             hash_check(word, insalt)
 
         # Loop for 2 letters
-        if length >= 2:
+        if length >= 1:
             for letter2 in alpha:
                 word = letter1 + letter2
-                if length == 2:
+                if length == 1:
                     hash_check(word, insalt)
 
                 # Loop for 3 letters
-                if length >= 3:
+                if length >= 2:
                     for letter3 in alpha:
                         word = letter1 + letter2 + letter3
-                        if length == 3:
+                        if length == 2:
                             hash_check(word, insalt)
 
                         # Loop for 4 letters
-                        if length >= 4:
+                        if length >= 3:
                             for letter4 in alpha:
                                 word = letter1 + letter2 + letter3 + letter4
-                                if length == 4:
+                                if length == 3:
                                     hash_check(word, insalt)
 
                                 # Loop for 5 letters
-                                if length >= 5:
+                                if length >= 4:
                                     for letter5 in alpha:
                                         word = letter1 + letter2 + letter3 + letter4 + letter5
-                                        if length == 5:
+                                        if length == 4:
                                             hash_check(word, insalt)
 
 
