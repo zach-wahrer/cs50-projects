@@ -51,13 +51,13 @@ def splitter(s, t, n):
     if t == "se":
         split = sent_tokenize(s)
 
-    # Substring split in range of n
+    # Substring in range of n into split
     if t == "su":
         split = set()
         c = 0
         for i in s:
-            if not i == "\n":
-                split.add(s[c:n+c+1])
+            if not i == "": #and not s[n+c] == False:
+                split.add(s[c:n+c])
                 c += 1
 
     return split
