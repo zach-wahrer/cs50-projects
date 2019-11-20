@@ -56,9 +56,9 @@ def splitter(s, t, n):
         split = set()
         c = 0
         for i in s:
-            if not i == "": #and not s[n+c] == False:
+            if not i == "" and not n+c > len(s):
                 split.add(s[c:n+c])
-                c += 1
+            c += 1
 
     return split
 
