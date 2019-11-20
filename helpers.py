@@ -55,8 +55,11 @@ def splitter(s, t, n):
     if t == "su":
         split = set()
         c = 0
+        # Iterate over every character
         for i in s:
+            # Prevent adding substrings past the end of the input
             if n+c <= len(s):
+                # Add the correct length substring to the set
                 split.add(s[c:n+c])
             c += 1
 
