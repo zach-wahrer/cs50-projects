@@ -65,7 +65,7 @@ def post_form():
 def get_sheet():
 
     out = list()
-#    out = Markup()
+
     # Open the CSV file
     with open('survey.csv', "r") as file:
         reader = csv.reader(file)
