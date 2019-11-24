@@ -64,21 +64,14 @@ def post_form():
 @app.route("/sheet", methods=["GET"])
 def get_sheet():
 
-    out = Markup()
+    out = list()
+#    out = Markup()
     # Open the CSV file
     with open('survey.csv', "r") as file:
-        read = csv.reader(file)
+        reader = csv.reader(file)
 
-        # Iterate over each row
-        for row in read:
-            # Set up initial HTML for each row
-            out += Markup("<tr>\n")
-
-            # Split the elements
-            for i in row:
-                out += Markup(f"                <td>{i}</td>\n")
-
-            # Finish off the HTML
-            out += Markup("            </tr>\n")
+        # Read the file into a list
+        for row in reader:
+            out.append(row)
 
     return render_template("sheet.html", data=out)

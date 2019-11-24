@@ -18,7 +18,15 @@
             </tr>
         </thead>
         <tbody>
-            {{ data }}
+            {% for row in data %}
+                <tr>
+                    {% for cell in row %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
