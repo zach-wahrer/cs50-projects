@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+
+    {% if data %}
+    <div class="container">
+        <h2>{{ data.name }} ({{data.symbol}})</h2>
+        <h3>${{ data.price }} / share</h3>
+    </div>
+    <br>
+    {% endif %}
+
+    <form action="/quote" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" name="symbol" placeholder="Symbol" autofocus>
+        </div>
+        <button class="btn btn-primary" type="submit">Check</button>
+    </form>
+{% endblock %}
