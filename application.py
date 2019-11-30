@@ -234,7 +234,7 @@ def register():
 
         # Check for duplicate username
         if not check:
-            return apology("That username is taken. Please try another.", 409)
+            return apology("That username is taken. Please try another.", 400)
         else:
             flash('Account created successfully. Please log in.')
 
