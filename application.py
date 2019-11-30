@@ -200,11 +200,16 @@ def quote():
     # Display quote if POSTed data
     if request.method == "POST":
 
-        # Get input
-        data = lookup(request.form.get("symbol"))
+        # Make sure input isn't blank
+        if request.form.get("symbol"):
+            # Get input
+            data = lookup(request.form.get("symbol"))
+        else:
+            return apology("You have to enter a symbol.", 400)
+
         # Flash if symbol unknown
         if data == None:
-            flash("That symbol does not exist.")
+            return apology("Invalid symbol.", 400)
 
         return render_template("quote.html", data=data)
 
