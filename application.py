@@ -294,7 +294,7 @@ def sell():
                         update = db.execute("UPDATE users SET cash = :new_cash WHERE id = :user_id", new_cash=new_cash, user_id=session["user_id"])
 
                         flash(f"You successfully sold {usd(sale)} worth of {request.form.get('symbol')}")
-                        return redirect("/sell")
+                        return redirect("/")
 
                     # Error if cash couldn't be updated and delete the sell
                     else:
