@@ -211,7 +211,7 @@ def quote():
             # Get input
             data = lookup(request.form.get("symbol"))
             # Format the number
-            int(data["price"])
+            data["price"] = int(data["price"])
         else:
             return apology("You have to enter a symbol.", 400)
 
