@@ -101,15 +101,17 @@ def buy():
                           user=session["user_id"], symbol=finalid, shares=int(request.form.get("shares")), price=stock["price"]) <= 0:
 
                 # Restore balance if transaction unsuccessful
-                db.execute("UPDATE users SET cash = :original WHERE id = :user_id", original=db_return[0]["cash"], user_id=session["user_id"])
+                db.execute("UPDATE users SET cash = :original WHERE id = :user_id", original=db_return[0]['cash'], user_id=session["user_id"])
                 # Report error
                 return apology("Your transaction could not be processed.", 500)
 
 
-        # Return success via flash
-        flash(f"You bought {usd(value)} worth of {stock['name']} shares.")
+
         # Look up username and cash for the webpage
         userdata = db.execute("SELECT username, cash FROM users WHERE id = :userid", userid=session["user_id"])
+
+        # Return success via flash
+        flash(f"You bought {usd(value)} worth of {stock['name']} shares. {usd(userdata[0]['cash'])} available.")
 
         # Get the current portfolio
         stocks = portfolio()
