@@ -25,8 +25,8 @@
                     <tr>
                         <td>{{ row[0] }}</td>
                         <td>{{ row[1] }}</td>
-                        <td>{{ row[2] }}</td>
-                        <td>{{ row[3] }}</td>
+                        <td>{{ row[2] | usd }}</td>
+                        <td>{{ row[3] | usd }}</td>
                     </tr>
                 {% endfor %}
 

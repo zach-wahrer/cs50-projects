@@ -93,13 +93,13 @@ def portfolio():
         # Look up price per share
         quote = lookup(symbol[0]["symbol"])
         # Calculate current value
-        value = row[1] * usd(float(quote["price"]))
+        value = row[1] * quote["price"]
         # Add it to the tally
         total_value += value
 
         # Put the values in a final list
         name_symbol = f"{quote['name']} ({symbol[0]['symbol']})"
-        tmp = (name_symbol, row[1], usd(quote["price"]), usd(value), symbol[0]["symbol"])
+        tmp = (name_symbol, row[1], quote["price"], value, symbol[0]["symbol"])
         final.append(tmp)
 
     final.append(total_value)
