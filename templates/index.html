@@ -35,19 +35,19 @@
                 <tr>
                     <td colspan="2" rowspan="3"></td>
                     <td class="bg-warning">Stock Value</td>
-                    <td class="bg-warning">{{ total_value }}</td>
+                    <td class="bg-warning">{{ total_value | usd }}</td>
                 </tr>
                 <tr>
                     <td class="bg-warning">Cash</td>
-                    <td class="bg-warning">{{ cash }}</td>
+                    <td class="bg-warning">{{ cash | usd }}</td>
                 </tr>
                 <tr>
                     <td class="bg-warning">Total Assets</td>
-                    <td class="bg-warning">{{ total }}</td>
+                    <td class="bg-warning">{{ total | usd }}</td>
                 </tr>
             </tfoot>
         </table>
-56.00
+
         <script>
             $(document).ready(function() {
                 $('#stock-table').DataTable();

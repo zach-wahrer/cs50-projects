@@ -53,8 +53,8 @@ def index():
     # Get the current total value of the stocks
     total_value = stocks.pop()
 
-    return render_template("index.html", username=userdata[0]["username"], cash=usd(userdata[0]["cash"]), \
-                           stocks=stocks, total_value=usd(total_value), total=usd(userdata[0]["cash"] + total_value))
+    return render_template("index.html", username=userdata[0]["username"], cash=userdata[0]["cash"], \
+                           stocks=stocks, total_value=total_value, total=userdata[0]["cash"] + total_value)
 
 
 @app.route("/buy", methods=["GET", "POST"])
