@@ -86,7 +86,7 @@ def buy():
 
         # Do the transaction if the user's funds are successfully decremented
         if db.execute("UPDATE users SET cash = :remaining WHERE id = :user_id", \
-                      remaining=usd(db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
+                      remaining='%.2f'%(db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
 
             # Look up the symbol ID
             symbolid = db.execute("SELECT id FROM symbols WHERE symbol = :symbol", symbol=stock["symbol"])
@@ -210,6 +210,8 @@ def quote():
         if request.form.get("symbol"):
             # Get input
             data = lookup(request.form.get("symbol"))
+            # Format the number
+            int(data["price"])
         else:
             return apology("You have to enter a symbol.", 400)
 

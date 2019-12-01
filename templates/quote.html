@@ -9,7 +9,7 @@
     {% if data %}
     <div class="container">
         <h2>{{ data.name }} ({{data.symbol}})</h2>
-        <h3>$ {{ data.price }} / share</h3>
+        <h3>{{ data.price | usd }} / share</h3>
     </div>
     <br>
     {% endif %}
