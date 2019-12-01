@@ -23,6 +23,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 # Custom filter
 app.jinja_env.filters["usd"] = usd
 
@@ -53,7 +54,7 @@ def index():
     # Get the current total value of the stocks
     total_value = stocks.pop()
 
-    return render_template("index.html", username=userdata[0]["username"], cash=userdata[0]["cash"], \
+    return render_template("index.html", username=userdata[0]["username"], cash=userdata[0]["cash"],
                            stocks=stocks, total_value=total_value, total=userdata[0]["cash"] + total_value)
 
 
@@ -77,7 +78,8 @@ def buy():
             return apology("That symbol does not exist.", 400)
 
         # Get current cash and set some vars
-        db_return = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
+        db_return = db.execute("SELECT cash FROM users WHERE id = :user_id",
+                               user_id=session["user_id"])
         value = stock["price"] * int(request.form.get("shares"))
 
         # Check to make sure user has enough money for transaction
@@ -85,8 +87,8 @@ def buy():
             return apology(f"You cannot afford that many shares of {stock['name']}.")
 
         # Do the transaction if the user's funds are successfully decremented
-        if db.execute("UPDATE users SET cash = :remaining WHERE id = :user_id", \
-                      remaining='%.2f'%(db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
+        if db.execute("UPDATE users SET cash = :remaining WHERE id = :user_id",
+                      remaining='%.2f' % (db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
 
             # Look up the symbol ID
             symbolid = db.execute("SELECT id FROM symbols WHERE symbol = :symbol", symbol=stock["symbol"])
@@ -97,22 +99,20 @@ def buy():
                 finalid = symbolid[0]["id"]
 
             # Put the transaction into the database
-            if db.execute("INSERT INTO transactions (user, symbol_id, type, shares, price) VALUES (:user, :symbol, 'B', :shares, :price)", \
+            if db.execute("INSERT INTO transactions (user, symbol_id, type, shares, price) VALUES (:user, :symbol, 'B', :shares, :price)",
                           user=session["user_id"], symbol=finalid, shares=int(request.form.get("shares")), price=stock["price"]) <= 0:
 
                 # Restore balance if transaction unsuccessful
-                db.execute("UPDATE users SET cash = :original WHERE id = :user_id", original=db_return[0]['cash'], user_id=session["user_id"])
+                db.execute("UPDATE users SET cash = :original WHERE id = :user_id",
+                           original=db_return[0]['cash'], user_id=session["user_id"])
                 # Report error
                 return apology("Your transaction could not be processed.", 500)
-
-
 
         # Look up cash for the webpage
         userdata = db.execute("SELECT cash FROM users WHERE id = :userid", userid=session["user_id"])
 
         # Return success via flash
         flash(f"You bought {usd(value)} worth of {stock['name']} shares. {usd(userdata[0]['cash'])} available.")
-
 
         return redirect("/")
 
@@ -141,8 +141,8 @@ def history():
     userdata = db.execute("SELECT username FROM users WHERE id = :userid", userid=session["user_id"])
 
     # Get all transactions
-    stocks = db.execute("SELECT symbol, type, shares, price, date FROM transactions JOIN symbols ON symbols.id = transactions.symbol_id WHERE user = :user_id", \
-                          user_id=session["user_id"])
+    stocks = db.execute("SELECT symbol, type, shares, price, date FROM transactions JOIN symbols ON symbols.id = transactions.symbol_id WHERE user = :user_id",
+                        user_id=session["user_id"])
     # Exit if user has no transactions
     if not stocks:
         return render_template("history.html", username=userdata[0]["username"])
@@ -245,8 +245,8 @@ def register():
             return apology("Your passwords didn't match.")
 
         # Insert user/pass into database
-        check = db.execute("INSERT INTO 'users' ('username', 'hash') VALUES (:user, :hashword)", \
-                       user=request.form.get("username"), hashword=generate_password_hash(request.form.get("password")))
+        check = db.execute("INSERT INTO 'users' ('username', 'hash') VALUES (:user, :hashword)",
+                           user=request.form.get("username"), hashword=generate_password_hash(request.form.get("password")))
 
         # Check for duplicate username
         if not check:
@@ -278,7 +278,7 @@ def sell():
         try:
             q = db.execute("SELECT id FROM symbols WHERE symbol = :symbol", symbol=request.form.get("symbol"))
         except:
-                return apology("Your transaction couldn't be completed.", 400)
+            return apology("Your transaction couldn't be completed.", 400)
 
         for row in stock_owned():
             if row[0] == q[0]["id"]:
@@ -288,15 +288,16 @@ def sell():
                 # Do the transaction
                 else:
                     check = lookup(request.form.get("symbol"))
-                    insert = db.execute("INSERT INTO transactions (user, symbol_id, type, shares, price) VALUES (:user, :symbol_id, 'S', :shares, :price)", \
-                                   user=session["user_id"], symbol_id=row[0], shares=request.form.get("shares"), price=check["price"])
+                    insert = db.execute("INSERT INTO transactions (user, symbol_id, type, shares, price) VALUES (:user, :symbol_id, 'S', :shares, :price)",
+                                        user=session["user_id"], symbol_id=row[0], shares=request.form.get("shares"), price=check["price"])
                     # Update available cash
                     if insert > 0:
                         # Get updated cash amount and change database
                         cash = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
                         sale = (int(request.form.get("shares")) * check["price"])
                         new_cash = cash[0]["cash"] + sale
-                        db.execute("UPDATE users SET cash = :new_cash WHERE id = :user_id", new_cash=new_cash, user_id=session["user_id"])
+                        db.execute("UPDATE users SET cash = :new_cash WHERE id = :user_id",
+                                   new_cash=new_cash, user_id=session["user_id"])
 
                         flash(f"You successfully sold {usd(sale)} worth of {request.form.get('symbol')}")
                         return redirect("/")
@@ -309,7 +310,6 @@ def sell():
         # If it makes it to the end without finding a stock to sell
         return apology("Your transaction couldn't be completed.", 400)
 
-
     # Make sell form if no data submitted
     else:
         final_list = list()
@@ -320,6 +320,7 @@ def sell():
 
         final_list.sort()
         return render_template("sell.html", stocks_owned=final_list)
+
 
 def errorhandler(e):
     """Handle error"""

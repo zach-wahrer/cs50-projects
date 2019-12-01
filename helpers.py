@@ -45,7 +45,8 @@ def lookup(symbol):
     # Contact API
     try:
         api_key = os.environ.get("API_KEY")
-        response = requests.get(f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
+        response = requests.get(
+            f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
         response.raise_for_status()
     except requests.RequestException:
         return None
@@ -61,17 +62,17 @@ def lookup(symbol):
     except (KeyError, TypeError, ValueError):
         return None
 
+
 def transactions(t_type):
     """ Get all the transactions of a given type (B or S) """
 
     final = list()
 
     # Loop to add up all transactions per distinct stock id for current type
-    for row in db.execute("SELECT DISTINCT symbol_id FROM transactions WHERE type = :t_type and user = :user_id", \
-                          t_type=t_type, user_id=session["user_id"]):
+    for row in db.execute("SELECT DISTINCT symbol_id FROM transactions WHERE type = :t_type and user = :user_id", t_type=t_type, user_id=session["user_id"]):
 
         # Number of shares bought per id
-        q = db.execute("SELECT SUM(shares) FROM transactions WHERE user = :userid AND symbol_id = :symbol_id AND type = :t_type", \
+        q = db.execute("SELECT SUM(shares) FROM transactions WHERE user = :userid AND symbol_id = :symbol_id AND type = :t_type",
                        userid=session["user_id"], symbol_id=row["symbol_id"], t_type=t_type)
         tmp = (row["symbol_id"], q[0]["SUM(shares)"])
         final.append(tmp)
@@ -105,6 +106,7 @@ def portfolio():
     final.append(total_value)
     return final
 
+
 def stock_owned():
     """ Returns a list of owned stocks (stock ID, shares) """
     final = list()
@@ -124,6 +126,7 @@ def stock_owned():
             final.append(tmp)
 
     return final
+
 
 def usd(value):
     """Format value as USD."""
