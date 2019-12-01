@@ -107,7 +107,7 @@ def buy():
 
 
         # Return success via flash
-        flash(f"You bought ${value} worth of {stock['name']} shares.")
+        flash(f"You bought ${value:.2f} worth of {stock['name']} shares.")
         return render_template("buy.html")
 
     # Show the buy form if no info submitted
