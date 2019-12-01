@@ -86,7 +86,7 @@ def buy():
 
         # Do the transaction if the user's funds are successfully decremented
         if db.execute("UPDATE users SET cash = :remaining WHERE id = :user_id", \
-                      remaining='%.2f'%(db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
+                      remaining=usd(db_return[0]["cash"] - value), user_id=session["user_id"]) != None:
 
             # Look up the symbol ID
             symbolid = db.execute("SELECT id FROM symbols WHERE symbol = :symbol", symbol=stock["symbol"])
