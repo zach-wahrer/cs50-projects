@@ -278,13 +278,13 @@ def sell():
         try:
             q = db.execute("SELECT id FROM symbols WHERE symbol = :symbol", symbol=request.form.get("symbol"))
         except:
-                return apology("Your transaction couldn't be completed.", 500)
+                return apology("Your transaction couldn't be completed.", 400)
 
         for row in stock_owned():
             if row[0] == q[0]["id"]:
                 # Error if user tries to sell more shares than they have available
                 if int(request.form.get("shares")) > row[1]:
-                    return apology(f"You do not have that many shares of {request.form.get('symbol')} to sell", 403)
+                    return apology(f"You do not have that many shares of {request.form.get('symbol')} to sell", 400)
                 # Do the transaction
                 else:
                     check = lookup(request.form.get("symbol"))
@@ -307,7 +307,7 @@ def sell():
                         return apology("Your transaction couldn't be completed.", 500)
 
         # If it makes it to the end without finding a stock to sell
-        return apology("Your transaction couldn't be completed.", 500)
+        return apology("Your transaction couldn't be completed.", 400)
 
 
     # Make sell form if no data submitted
