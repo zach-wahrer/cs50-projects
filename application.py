@@ -108,7 +108,16 @@ def buy():
 
         # Return success via flash
         flash(f"You bought {usd(value)} worth of {stock['name']} shares.")
-        return render_template("buy.html")
+        # Look up username and cash for the webpage
+        userdata = db.execute("SELECT username, cash FROM users WHERE id = :userid", userid=session["user_id"])
+
+        # Get the current portfolio
+        stocks = portfolio()
+        # Get the current total value of the stocks
+        total_value = stocks.pop()
+
+        return render_template("index.html", username=userdata[0]["username"], cash=usd(userdata[0]["cash"]), \
+                           stocks=stocks, total_value=usd(total_value), total=usd(userdata[0]["cash"] + total_value))
 
     # Show the buy form if no info submitted
     else:
