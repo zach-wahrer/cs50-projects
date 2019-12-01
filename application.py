@@ -296,7 +296,7 @@ def sell():
                         cash = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
                         sale = (int(request.form.get("shares")) * check["price"])
                         new_cash = cash[0]["cash"] + sale
-                        update = db.execute("UPDATE users SET cash = :new_cash WHERE id = :user_id", new_cash=new_cash, user_id=session["user_id"])
+                        db.execute("UPDATE users SET cash = :new_cash WHERE id = :user_id", new_cash=new_cash, user_id=session["user_id"])
 
                         flash(f"You successfully sold {usd(sale)} worth of {request.form.get('symbol')}")
                         return redirect("/")
