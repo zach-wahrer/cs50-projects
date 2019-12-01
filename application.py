@@ -210,9 +210,11 @@ def quote():
         if request.form.get("symbol"):
             # Get input
             data = lookup(request.form.get("symbol"))
-            # Format the number
-            data["price"] = float(data["price"])
-            data["price"] = usd(data["price"])
+            # Format the quote if the lookup is successful
+            if data:
+                # Format the number
+                data["price"] = float(data["price"])
+                data["price"] = usd(data["price"])
         else:
             return apology("You have to enter a symbol.", 400)
 
