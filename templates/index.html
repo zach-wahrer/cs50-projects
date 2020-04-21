@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="col">
+        <form action="/compare" enctype="multipart/form-data" method="post">
+
+            <p>
+            <input type="file" name="file1" selected autofocus>
+            </p><p>
+            <input type="file" name="file2">
+            </p><p>
+            <input type="radio" name="algorithm" value="lines" onclick="hideLen()"> Compare lines<br>
+            <input type="radio" name="algorithm" value="sentences" onclick="hideLen()"> Compare sentences<br>
+            <input type="radio" name="algorithm" value="substrings" onclick="showLen()"> Compare substrings<br>
+            <div id="len" style="display: none;">
+                Length: <input type="number" name="length">
+            </div>
+            </p><p>
+            <button type="submit">Compare</button>
+            </p>
+
+        </form>
+
+        <script>
+            function showLen() {
+                document.getElementById("len").style.display = "block";
+            }
+
+            function hideLen() {
+                document.getElementById("len").style.display = "none";
+            }
+        </script>
+    </div>
+
+{% endblock %}
