@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-danger" role="alert" style="display: none;" id="alert">
+        That username is already taken.
+    </div>
+
+    <form action="/register" method="post" id="form">
+        <div class="form-group">
+            <input type="text" name="username" id="user" class="form-control" autocomplete="off" placeholder="Username" autofocus>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input type="password" name="confirmation" class="form-control" placeholder="Password (Repeat)">
+        </div>
+        <button class="btn btn-primary" type="submit" onclick="event.preventDefault(); check();">Register</button>
+    </form>
+
+    <script>
+
+        // Validate username
+        function check() {
+            // Check if current
+            $.get( 'check', 'username='+ document.getElementById("user").value, function(valid) {
+                // Show error if taken
+                if (valid == false) {
+                    document.getElementById("alert").style.display = "block";
+                }
+                // Submit if free
+                else if (valid == true) {
+                    document.getElementById("alert").style.display = "none";
+                    document.getElementById("form").submit();
+                }
+            } );
+        }
+    </script>
+{% endblock %}

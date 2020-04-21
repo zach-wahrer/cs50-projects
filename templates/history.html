@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ username }}'s Portfolio
+{% endblock %}
+
+{% block main %}
+
+    <h1>{{ username }}'s History</h1>
+
+    {% if stocks %}
+
+        <table id="stock-table" class="table table-striped table-bordered table-hover mt-4" style="width:100%;">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Type</th>
+                    <th>Shares</th>
+                    <th>At Price</th>
+                    <th>On</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Stocks go Here -->
+                {% for row in stocks %}
+                    <tr>
+                        <td>{{ row["symbol"] }}</td>
+                        {% if row["type"] == "B" %}
+                        <td class="bg-success">Bought</td>
+                        {% else %}
+                        <td class="bg-warning">Sold</td>
+                        {% endif %}
+                        <td>{{ row["shares"] }}</td>
+                        <td>{{ row["price"] }}</td>
+                        <td>{{ row["date"] }}</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+            <tfoot class="bg-primary">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Bought / Sold</th>
+                    <th>Shares</th>
+                    <th>At Price</th>
+                    <th>On</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <script>
+            $(document).ready(function() {
+                $('#stock-table').DataTable();
+            } );
+        </script>
+
+    {% else %}
+
+        <p>
+            <h4>Your portfolio is currently empty.<br>Want to <a href="/buy">buy some stocks?</a></h4>
+        </p>
+
+    {% endif %}
+
+{% endblock %}
